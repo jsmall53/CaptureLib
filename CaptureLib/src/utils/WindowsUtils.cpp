@@ -51,8 +51,8 @@ std::string Utils::WindowsUtils::GetWindowTitle(HWND window)
 		return "";
 	}
 
-	wchar_t *name_w = (wchar_t*)malloc(sizeof(wchar_t) * (len + 1));
-	char *name = (char*)malloc(sizeof(char) * (len + 1));
+	wchar_t *name_w = new wchar_t[len + 1];
+	char *name = new char[len + 1];
 	if (GetWindowText(window, name_w, len + 1)) {
 		wcstombs(name, name_w, len + 1);
 	}
