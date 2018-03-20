@@ -33,6 +33,15 @@
     <ClInclude Include="src\utils\WindowsUtils.h">
       <Filter>Header Files\utils</Filter>
     </ClInclude>
+    <ClInclude Include="src\obs\funchook.h">
+      <Filter>Header Files\obs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\obs\graphics-hook-info.h">
+      <Filter>Header Files\obs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\obs\inject-library.h">
+      <Filter>Header Files\obs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Capture.cpp">
@@ -43,6 +52,12 @@
     </ClCompile>
     <ClCompile Include="src\utils\WindowsUtils.cpp">
       <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\obs\funchook.c">
+      <Filter>Source Files\obs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\obs\inject-library.c">
+      <Filter>Source Files\obs</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
