@@ -1,3 +1,5 @@
 CaptureLib is inspired by obs-studio, and even uses parts of its code base and tool chain. The OBS project website can be found at https://obsproject.com/ and the source code can be found here https://github.com/obsproject/obs-studio
 
 This project has a different scope. It is purely meant for capturing raw pixel data which you can do with that you. I might add support for specific output formats in the future, but at the beginning the only supported output will be raw pixel data captured from the GPU. This has use in my own endeavors so I imagine others might find it useful as well.
+
+Currently in very early stages of development, so it is only configured as a Windows console application. The end product will be a shared library with an easy to use API.
