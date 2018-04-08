@@ -42,6 +42,9 @@
     <ClInclude Include="src\obs\inject-library.h">
       <Filter>Header Files\obs</Filter>
     </ClInclude>
+    <ClInclude Include="src\CaptureInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Capture.cpp">
@@ -58,6 +61,9 @@
     </ClCompile>
     <ClCompile Include="src\obs\inject-library.c">
       <Filter>Source Files\obs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CaptureInfo.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -6,20 +6,24 @@
 #include <vector>
 #include <obs/obfuscate.h>
 
-namespace Utils {
-
 struct WindowInfo {
 	HWND window;
 	std::string title;
 	std::string class_name;
 	std::string executable;
+	DWORD process_id;
+	DWORD thread_id;
+	RECT wndRect;
 };
 
 class WindowsUtils {
 public:
 	static std::string GetWindowExecutable(HWND window);
+	static DWORD GetWindowProcessId(HWND window);
+	static DWORD GetWindowTheadId(HWND window);
 	static std::string GetWindowClass(HWND window);
 	static std::string GetWindowTitle(HWND window);
+	static RECT GetWindowPosition(HWND window);
 	static bool TryGetWindowInfo(struct WindowInfo *info, std::string window);
 	static HANDLE Open_Process(DWORD processID, DWORD access);
 
@@ -43,5 +47,3 @@ private:
 
 	static std::vector<HWND> WindowList;
 };
-
-}

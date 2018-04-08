@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\CaptureInfo.h" />
     <ClInclude Include="src\obs\funchook.h" />
     <ClInclude Include="src\obs\graphics-hook-info.h" />
     <ClInclude Include="src\obs\inject-library.h" />
@@ -158,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Capture.cpp" />
+    <ClCompile Include="src\CaptureInfo.cpp" />
     <ClCompile Include="src\obs\funchook.c" />
     <ClCompile Include="src\obs\inject-library.c" />
     <ClCompile Include="src\obs\obfuscate.c" />
