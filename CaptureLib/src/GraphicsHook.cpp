@@ -17,12 +17,14 @@ GraphicsHook::~GraphicsHook()
 
 void GraphicsHook::Initialize()
 {
+	//TODO: dont use hardcoded paths
 	_hookDllPath = "D:/git/Capture/CaptureLib/obs_deps/graphics-hook64.dll";
 	_injectPath = "D:/git/Capture/CaptureLib/obs_deps/inject-helper64.exe";
 }
 
 bool GraphicsHook::Inject()
 {
+	//TODO: Wrap this
 	wchar_t injectPathW[MAX_PATH] = { 0 };
 	wchar_t hookDllPathW[MAX_PATH] = { 0 };;
 	std::wstring cmdLineArgsW;
