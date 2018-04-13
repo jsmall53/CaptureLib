@@ -45,6 +45,12 @@
     <ClInclude Include="src\CaptureInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\utils\Utils.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GraphicsHook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Capture.cpp">
@@ -63,6 +69,12 @@
       <Filter>Source Files\obs</Filter>
     </ClCompile>
     <ClCompile Include="src\CaptureInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\Utils.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicsHook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

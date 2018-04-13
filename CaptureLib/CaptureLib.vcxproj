@@ -151,18 +151,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\CaptureInfo.h" />
+    <ClInclude Include="src\GraphicsHook.h" />
     <ClInclude Include="src\obs\funchook.h" />
     <ClInclude Include="src\obs\graphics-hook-info.h" />
     <ClInclude Include="src\obs\inject-library.h" />
     <ClInclude Include="src\obs\obfuscate.h" />
+    <ClInclude Include="src\utils\Utils.h" />
     <ClInclude Include="src\utils\WindowsUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Capture.cpp" />
     <ClCompile Include="src\CaptureInfo.cpp" />
+    <ClCompile Include="src\GraphicsHook.cpp" />
     <ClCompile Include="src\obs\funchook.c" />
     <ClCompile Include="src\obs\inject-library.c" />
     <ClCompile Include="src\obs\obfuscate.c" />
+    <ClCompile Include="src\utils\Utils.cpp" />
     <ClCompile Include="src\utils\WindowsUtils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

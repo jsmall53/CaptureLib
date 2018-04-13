@@ -24,7 +24,7 @@ public:
 		return SetTarget(std::string(target));
 	}
 
-	std::string GetName() const {
+	std::string Target() const {
 		return _targetName;
 	}
 
@@ -32,10 +32,15 @@ public:
 		return _wndInfo;
 	}
 
+	void SetInjectorProcess(HANDLE hProcess) {
+		_injectorProcess = hProcess;
+	}
+
 private:
 	std::string _targetName;
 	WindowInfo _wndInfo;
 
-	bool _hooked;
+	HANDLE _injectorProcess;
+
 	bool _isCapturing;
 };
