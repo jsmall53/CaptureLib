@@ -4,18 +4,21 @@ CaptureInfo::CaptureInfo()
 {
 	_wndInfo = { 0 };
 	_targetName = std::string("");
+	Initialize();
 }
 
 CaptureInfo::CaptureInfo(std::string name)
 {
 	_wndInfo = { 0 };
 	_targetName = name;
+	Initialize();
 }
 
 CaptureInfo::CaptureInfo(const char * name)
 {
 	_wndInfo = { 0 };
 	_targetName = std::string(name);
+	Initialize();
 }
 
 CaptureInfo::~CaptureInfo()

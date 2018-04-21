@@ -5,11 +5,16 @@ class GraphicsHook {
 public:
 	GraphicsHook();
 	GraphicsHook(CaptureInfo *info);
+	GraphicsHook(const char* processToHook);
 	~GraphicsHook();
 	
 	
 	//Public Methods
 	void Initialize();
+
+	//Hooking
+	bool TryHook(); //TODO: rename
+	bool InitHook(); //TODO: rename
 	bool Inject();
 	
 
@@ -27,6 +32,7 @@ private:
 
 	//
 	static std::wstring CreateInjectCmdArgs(wchar_t* injectW, wchar_t* hookDllW, CaptureInfo* info);
+	bool CreateKeepAliveMutex();
 
 	//
 	CaptureInfo* _captureProcess;

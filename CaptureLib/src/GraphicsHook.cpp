@@ -11,6 +11,12 @@ GraphicsHook::GraphicsHook(CaptureInfo* info)
 	_captureProcess = info;
 }
 
+GraphicsHook::GraphicsHook(const char * processToHook)
+	:_isHooked(false)
+{
+	_captureProcess = new CaptureInfo(processToHook);
+}
+
 GraphicsHook::~GraphicsHook()
 {
 }
@@ -20,6 +26,16 @@ void GraphicsHook::Initialize()
 	//TODO: dont use hardcoded paths
 	_hookDllPath = "D:/git/Capture/CaptureLib/obs_deps/graphics-hook64.dll";
 	_injectPath = "D:/git/Capture/CaptureLib/obs_deps/inject-helper64.exe";
+}
+
+bool GraphicsHook::TryHook()
+{
+	return false;
+}
+
+bool GraphicsHook::InitHook()
+{
+	return false;
 }
 
 bool GraphicsHook::Inject()
@@ -59,4 +75,12 @@ std::wstring GraphicsHook::CreateInjectCmdArgs(wchar_t* injectW, wchar_t* hookDl
 		injectW, hookDllW, TRUE, windowInfo.thread_id); //uses thread_id for "safe"
 
 	return std::wstring(args);
+}
+
+bool GraphicsHook::CreateKeepAliveMutex()
+{
+	wchar_t mutex_name[64] = { 0 };
+
+
+	return false;
 }

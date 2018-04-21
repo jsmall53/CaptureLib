@@ -36,11 +36,21 @@ public:
 		_injectorProcess = hProcess;
 	}
 
+	void SetTargetProcess(HANDLE hProcess) {
+		_targetProcess = hProcess;
+	}
+
+	void SetKeepaliveMutex(HANDLE mutex) {
+		_keepaliveMutex = mutex;
+	}
+
 private:
 	std::string _targetName;
 	WindowInfo _wndInfo;
 
 	HANDLE _injectorProcess;
+	HANDLE _targetProcess;
+	HANDLE _keepaliveMutex;
 
 	bool _isCapturing;
 };
