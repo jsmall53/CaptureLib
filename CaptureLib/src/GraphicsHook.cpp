@@ -24,18 +24,41 @@ GraphicsHook::~GraphicsHook()
 void GraphicsHook::Initialize()
 {
 	//TODO: dont use hardcoded paths
-	_hookDllPath = "D:/git/Capture/CaptureLib/obs_deps/graphics-hook64.dll";
-	_injectPath = "D:/git/Capture/CaptureLib/obs_deps/inject-helper64.exe";
+	_hookDllPath = "D:\\git\\Capture\\CaptureLib\\bin\\Debug_x64\\graphics-hook64.dll";
+	_injectPath = "D:\\git\\Capture\\CaptureLib\\bin\\Debug_x64\\inject-helper64.exe";
+
+	_captureProcess->Initialize();
 }
 
 bool GraphicsHook::TryHook()
 {
-	return false;
+	try {
+		InitHook();
+	} catch (const std::exception &ex) {
+		//TODO: log the exception
+		UNREFERENCED_PARAMETER(ex);
+		return false;
+	}
+
+	return true;
 }
 
-bool GraphicsHook::InitHook()
+void GraphicsHook::InitHook()
 {
-	return false;
+	if (!_captureProcess->OpenTarget()) {
+		//TODO: Log error: could not open the target process
+		throw std::exception("could not open the target process");
+	}
+
+	if (!CreateKeepAliveMutex()) {
+		//TODO: Log error: could not create the keep alive
+		throw std::exception("could not create the keep alive");
+	}
+
+	if (!Inject()) {
+		//TODO: Log error: could not inject the hook into target
+		throw std::exception("could not inject the hook into target");
+	}
 }
 
 bool GraphicsHook::Inject()
@@ -75,12 +98,20 @@ std::wstring GraphicsHook::CreateInjectCmdArgs(wchar_t* injectW, wchar_t* hookDl
 		injectW, hookDllW, TRUE, windowInfo.thread_id); //uses thread_id for "safe"
 
 	return std::wstring(args);
+	return std::wstring(args);
 }
 
 bool GraphicsHook::CreateKeepAliveMutex()
 {
 	wchar_t mutex_name[64] = { 0 };
+	swprintf_s(mutex_name, 64, L"%ws%lu", L"GraphicsHook_", _captureProcess->GetWindowInfo().process_id);
 
+	HANDLE mutex = CreateMutex(NULL, false, mutex_name);
+	if (mutex == NULL) {
+		//TODO: LOG FAILURE
+		return false;
+	}
 
-	return false;
+	_captureProcess->SetKeepaliveMutex(mutex);
+	return true;
 }

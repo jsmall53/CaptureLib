@@ -11,6 +11,7 @@ public:
 
 	int Initialize();
 	void Clear();
+	bool OpenTarget();
 
 	bool SetTarget(std::string target) {
 		if (_targetName.empty()) {
@@ -28,7 +29,7 @@ public:
 		return _targetName;
 	}
 
-	WindowInfo GetWindowInfo() const {
+	WindowInfo GetWindowInfo() {
 		return _wndInfo;
 	}
 

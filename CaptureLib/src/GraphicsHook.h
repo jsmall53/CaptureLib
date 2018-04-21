@@ -14,7 +14,7 @@ public:
 
 	//Hooking
 	bool TryHook(); //TODO: rename
-	bool InitHook(); //TODO: rename
+	void InitHook(); //TODO: rename
 	bool Inject();
 	
 

@@ -43,3 +43,18 @@ void CaptureInfo::Clear()
 	_targetName.clear();
 	_wndInfo = { 0 };
 }
+
+bool CaptureInfo::OpenTarget()
+{
+	if (_targetName.empty()) {
+		//TODO: LOG ERROR: no target set
+		return false;
+	}
+
+	_targetProcess = WindowsUtils::Open_Process(_wndInfo.process_id, PROCESS_QUERY_INFORMATION | SYNCHRONIZE);
+	if (_targetProcess == NULL) {
+		return false;
+	}
+
+	return true;
+}
