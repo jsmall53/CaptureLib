@@ -37,9 +37,10 @@ bool GraphicsHook::TryHook()
 	} catch (const std::exception &ex) {
 		//TODO: log the exception
 		UNREFERENCED_PARAMETER(ex);
+		_isHooked = false;
 		return false;
 	}
-
+	_isHooked = true;
 	return true;
 }
 
@@ -85,7 +86,6 @@ bool GraphicsHook::Inject()
 		//LOG IT
 	}
 	//
-	_isHooked = success;
 	return success;
 }
 

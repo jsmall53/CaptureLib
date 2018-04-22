@@ -19,12 +19,12 @@ public:
 	
 
 	//Public Inlines
-	std::string HookedProcess()
+	std::string HookedProcess() const
 	{
 		return _captureProcess->Target();
 	}
 
-	bool IsHooked() {
+	bool IsHooked() const {
 		return _isHooked;
 	}
 
@@ -35,6 +35,7 @@ private:
 	bool CreateKeepAliveMutex();
 
 	//
+	//TODO: Don't think this class should own this object, will probably be owned by a parent controller/manager object
 	CaptureInfo* _captureProcess;
 
 	std::string _hookDllPath;
