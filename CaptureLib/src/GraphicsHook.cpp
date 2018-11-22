@@ -3,22 +3,27 @@
 GraphicsHook::GraphicsHook()
 	:_isHooked(false)
 {
+	_pipeServer = { 0 };
 }
 
 GraphicsHook::GraphicsHook(CaptureInfo* info)
-	:_isHooked(false)
+	:_isHooked(false),
+	_injectorProcess(NULL)
 {
 	_captureProcess = info;
+	_pipeServer = { 0 };
 }
 
 GraphicsHook::GraphicsHook(const char * processToHook)
 	:_isHooked(false)
 {
 	_captureProcess = new CaptureInfo(processToHook);
+	_pipeServer = { 0 };
 }
 
 GraphicsHook::~GraphicsHook()
 {
+	//
 }
 
 void GraphicsHook::Initialize()
@@ -30,12 +35,19 @@ void GraphicsHook::Initialize()
 	_captureProcess->Initialize();
 }
 
+void GraphicsHook::CleanUp()
+{
+	StopPipeServer();
+	_captureProcess->CleanUp();
+	CloseHandle(_injectorProcess);
+}
+
 bool GraphicsHook::TryHook()
 {
 	try {
 		InitHook();
 	} catch (const std::exception &ex) {
-		//TODO: log the exception
+		//TODO: log the exception (ex.what();)
 		UNREFERENCED_PARAMETER(ex);
 		_isHooked = false;
 		return false;
@@ -47,17 +59,14 @@ bool GraphicsHook::TryHook()
 void GraphicsHook::InitHook()
 {
 	if (!_captureProcess->OpenTarget()) {
-		//TODO: Log error: could not open the target process
 		throw std::exception("could not open the target process");
 	}
 
-	if (!CreateKeepAliveMutex()) {
-		//TODO: Log error: could not create the keep alive
+	if (!CreateKeepliveMutex()) {
 		throw std::exception("could not create the keep alive");
 	}
 
 	if (!Inject()) {
-		//TODO: Log error: could not inject the hook into target
 		throw std::exception("could not inject the hook into target");
 	}
 }
@@ -80,13 +89,29 @@ bool GraphicsHook::Inject()
 	success = CreateProcess(injectPathW, (LPWSTR)cmdLineArgsW.c_str(), NULL, NULL, false, CREATE_NO_WINDOW, NULL, NULL, &si, &pi);
 	if (success) {
 		CloseHandle(pi.hThread);
-		_captureProcess->SetInjectorProcess(pi.hProcess);
+		_injectorProcess = pi.hProcess;
 	}
 	else {
-		//LOG IT
+		//TODO: Log error: could not open injector process
 	}
 	//
 	return success;
+}
+
+bool GraphicsHook::StartPipeServer()
+{
+	//not sure what this method is for
+
+	char buf[64];
+	sprintf(buf, "%s_%lu", "GraphicsHookPipe", _captureProcess->GetWindowInfo().process_id);
+
+	//not sure what to do with the last two parameters
+	if (!ipc_pipe_server_start(&_pipeServer, buf, NULL, NULL)) {
+		//TODO: Log it: pipe server failed to start
+		return false;
+	}
+
+	return true;
 }
 
 std::wstring GraphicsHook::CreateInjectCmdArgs(wchar_t* injectW, wchar_t* hookDllW, CaptureInfo* info)
@@ -101,7 +126,7 @@ std::wstring GraphicsHook::CreateInjectCmdArgs(wchar_t* injectW, wchar_t* hookDl
 	return std::wstring(args);
 }
 
-bool GraphicsHook::CreateKeepAliveMutex()
+bool GraphicsHook::CreateKeepliveMutex()
 {
 	wchar_t mutex_name[64] = { 0 };
 	swprintf_s(mutex_name, 64, L"%ws%lu", L"GraphicsHook_", _captureProcess->GetWindowInfo().process_id);
@@ -114,4 +139,9 @@ bool GraphicsHook::CreateKeepAliveMutex()
 
 	_captureProcess->SetKeepaliveMutex(mutex);
 	return true;
+}
+
+void GraphicsHook::StopPipeServer()
+{
+	ipc_pipe_server_free(&_pipeServer);
 }

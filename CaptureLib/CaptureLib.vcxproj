@@ -97,6 +97,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>"$(ProjectDir)lib\"D:\boost_1_66_0\boost_1_66_0\stage\lib;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -107,10 +108,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions> _CRT_SECURE_NO_WARNINGS;BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(OPENCV_DIR)\..\..\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);D:\boost_1_66_0\boost_1_66_0\stage\lib;%OPENCV_DIR%\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_world343d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -129,6 +133,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>"$(ProjectDir)lib\"D:\boost_1_66_0\boost_1_66_0\stage\lib;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -147,14 +152,22 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib\D:\boost_1_66_0\boost_1_66_0\stage\lib;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\CaptureInfo.h" />
+    <ClInclude Include="src\capture_engine\CaptureCommon.h" />
+    <ClInclude Include="src\capture_engine\CaptureData.h" />
+    <ClInclude Include="src\capture_engine\ICaptureEngine.h" />
+    <ClInclude Include="src\capture_engine\ICaptureHook.h" />
+    <ClInclude Include="src\capture_engine\WindowCapture.h" />
     <ClInclude Include="src\GraphicsHook.h" />
     <ClInclude Include="src\obs\funchook.h" />
     <ClInclude Include="src\obs\graphics-hook-info.h" />
     <ClInclude Include="src\obs\inject-library.h" />
+    <ClInclude Include="src\obs\ipc-util\pipe-windows.h" />
+    <ClInclude Include="src\obs\ipc-util\pipe.h" />
     <ClInclude Include="src\obs\obfuscate.h" />
     <ClInclude Include="src\utils\Utils.h" />
     <ClInclude Include="src\utils\WindowsUtils.h" />
@@ -162,9 +175,12 @@
   <ItemGroup>
     <ClCompile Include="src\Capture.cpp" />
     <ClCompile Include="src\CaptureInfo.cpp" />
+    <ClCompile Include="src\capture_engine\CaptureData.cpp" />
+    <ClCompile Include="src\capture_engine\WindowCapture.cpp" />
     <ClCompile Include="src\GraphicsHook.cpp" />
     <ClCompile Include="src\obs\funchook.c" />
     <ClCompile Include="src\obs\inject-library.c" />
+    <ClCompile Include="src\obs\ipc-util\pipe-windows.c" />
     <ClCompile Include="src\obs\obfuscate.c" />
     <ClCompile Include="src\utils\Utils.cpp" />
     <ClCompile Include="src\utils\WindowsUtils.cpp" />

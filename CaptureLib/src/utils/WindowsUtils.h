@@ -24,7 +24,7 @@ public:
 	static std::string GetWindowClass(HWND window);
 	static std::string GetWindowTitle(HWND window);
 	static RECT GetWindowPosition(HWND window);
-	static bool TryGetWindowInfo(struct WindowInfo *info, std::string window);
+	static bool TryGetWindowInfo(std::string window, struct WindowInfo *info);
 	static HANDLE Open_Process(DWORD processID, DWORD access);
 
 private:

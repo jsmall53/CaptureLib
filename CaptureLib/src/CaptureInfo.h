@@ -1,6 +1,7 @@
 #pragma once
 #include <windows.h>
 #include "utils\WindowsUtils.h"
+#include <opencv2/core.hpp>
 
 class CaptureInfo {
 public:
@@ -11,6 +12,7 @@ public:
 
 	int Initialize();
 	void Clear();
+	void CleanUp();
 	bool OpenTarget();
 
 	bool SetTarget(std::string target) {
@@ -33,10 +35,6 @@ public:
 		return _wndInfo;
 	}
 
-	void SetInjectorProcess(HANDLE hProcess) {
-		_injectorProcess = hProcess;
-	}
-
 	void SetTargetProcess(HANDLE hProcess) {
 		_targetProcess = hProcess;
 	}
@@ -49,7 +47,7 @@ private:
 	std::string _targetName;
 	WindowInfo _wndInfo;
 
-	HANDLE _injectorProcess;
+	//HANDLE _injectorProcess;
 	HANDLE _targetProcess;
 	HANDLE _keepaliveMutex;
 

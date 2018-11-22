@@ -31,7 +31,7 @@ int CaptureInfo::Initialize()
 	if (_targetName.empty())
 		return -1;
 
-	if (!WindowsUtils::TryGetWindowInfo(&_wndInfo, _targetName)) {
+	if (!WindowsUtils::TryGetWindowInfo(_targetName, &_wndInfo)) {
 		return -1;
 	}
 
@@ -42,6 +42,12 @@ void CaptureInfo::Clear()
 {
 	_targetName.clear();
 	_wndInfo = { 0 };
+}
+
+void CaptureInfo::CleanUp()
+{
+	CloseHandle(_targetProcess);
+	CloseHandle(_keepaliveMutex);
 }
 
 bool CaptureInfo::OpenTarget()

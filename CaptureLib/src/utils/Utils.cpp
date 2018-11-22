@@ -1,6 +1,9 @@
 //
-#include <windows.h>
-#include <CaptureInfo.h>
+
+#include <utils/Utils.h>
+#include <list>
+
+using namespace std;
 
 static bool CheckFileIntegrity(CaptureInfo *info, 
 	std::string filePath,
@@ -26,4 +29,31 @@ static bool CheckFileIntegrity(CaptureInfo *info,
 		//LOG
 	}
 	//TODO: add in something to check hash against "registered" values
+}
+
+
+
+const int MAX_DIGITS = 10;
+//4321 = 1->2->3->4
+void IntToList(int num) {
+	if (num == 0) {
+		return;
+	}
+	string value = to_string(num);
+	list<int> list;
+
+	string::iterator end;
+	for (end = value.end() - 1; end > value.begin(); end--) {
+		list.push_back(*end);
+ 	}
+}
+
+bool SumEquals(int vals[], int target)
+{
+	int length = sizeof(vals) / sizeof(int);
+	for (int i = 0; i < length; i++) {
+		int num = target - vals[i];
+		//if num is in vals, return true;
+	}
+	return false;
 }

@@ -123,7 +123,7 @@ HWND WindowsUtils::FindWindowByName(std::string window)
 	return 0;
 }
 
-bool WindowsUtils::TryGetWindowInfo(WindowInfo * info, std::string window)
+bool WindowsUtils::TryGetWindowInfo(std::string window, WindowInfo * info)
 {
 	try {
 		*info = GetWindowInfo(window);
